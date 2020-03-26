@@ -1,12 +1,7 @@
 
-int lcd_key = 0;
-int adc_key_in = 0;
-#define btnRIGHT  0
-#define btnUP     1
-#define btnDOWN   2
-#define btnLEFT   3
-#define btnSELECT 4
-#define btnNONE   5
+#define btnUP     0
+#define btnDOWN   1
+
 
 struct ALU_Driver {
     int First;
@@ -18,16 +13,15 @@ ALU_Driver Driver[10];
 int Result_Array[10];
 
 int i=0;
-String operate()
-{
-  switch(Driver[i].opCode){
+String operate() {
+  switch(Driver[i].opCode) {
     case 0: {
       int Addition = Driver[i].First + Driver[i].Second;
       String Result;
       Result = Driver[i].First;
-      Result += "+";
+      Result += " + ";
       Result += Driver[i].Second;
-      Result += "=";
+      Result += " = ";
       Result += Addition;
       Result_Array[i] = Addition;
       return Result;
@@ -36,7 +30,7 @@ String operate()
       int Subtraction = Driver[i].First - Driver[i].Second;
       String Result;
       Result = Driver[i].First;
-      Result += "-";
+      Result += " - ";
       Result += Driver[i].Second;
       Result += "=";
       Result += Subtraction;
@@ -44,33 +38,73 @@ String operate()
       return Result;
     }
     case 2: {
-      int ShiftL = 
-      break;
+      int ShiftL = Driver[i].First << Driver[i].Second;
+      String Result;
+      Result = Driver[i].First;
+      Result += " << ";
+      Result += Driver[i].Second;
+      Result += " = ";
+      Result += ShiftL;
+      Result_Array[i] = ShiftL;
+      return Result; 
     }
     case 3: {
-      int ShiftR = 
-      break;
-    }
+      int ShiftRUS = (unsigned) Driver[i].First >> Driver[i].Second;
+      String Result;
+      Result = Driver[i].First;
+      Result += " unsigned >> ";
+      Result += Driver[i].Second;
+      Result += " = ";
+      Result += ShiftRUS;
+      Result_Array[i] = ShiftRUS;
+      return Result;
+      }
     case 4: {
-      int ShiftRS = 
-      break;
+      int ShiftRS = Driver[i].First >> Driver[i].Second;
+      String Result;
+      Result = Driver[i].First;
+      Result += " >> ";
+      Result += Driver[i].Second;
+      Result += " = ";
+      Result += ShiftRS;
+      Result_Array[i] = ShiftRS;
+      return Result;
     }
     case 5: {
-      int AND = 
-      break;
+      int AND = Driver[i].First & Driver[i].Second;
+      String Result;
+      Result = Driver[i].First;
+      Result += " & ";
+      Result += Driver[i].Second;
+      Result += " = ";
+      Result += AND;
+      Result_Array[i] = AND;
+      return Result;
     }
     case 6: {
-      int OR = 
-      break;
+      int OR = Driver[i].First | Driver[i].Second;
+      String Result;
+      Result = Driver[i].First;
+      Result += " | ";
+      Result += Driver[i].Second;
+      Result += " = ";
+      Result += OR;
+      Result_Array[i] = OR;
+      return Result;
     }
     case 7: {
-      int XOR = 
-      break;
+      int XOR = Driver[i].First ^ Driver[i].Second;
+      String Result;
+      Result = Driver[i].First;
+      Result += " ^ ";
+      Result += Driver[i].Second;
+      Result += " = ";
+      Result += XOR;
+      Result_Array[i] = XOR;
+      return Result;
     }
   }
 }
-
-
 
 
 
