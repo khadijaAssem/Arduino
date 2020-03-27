@@ -1,18 +1,21 @@
 
-#define btnUP     0
-#define btnDOWN   1
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+int i=-1;
+const int up = 0;
+const int down = 1;
 
 
 struct ALU_Driver {
     int First;
     int Second;
-    byte opCode : 3
+    byte opCode : 3;
 };
 
 ALU_Driver Driver[10];
 int Result_Array[10];
 
-int i=0;
 String operate() {
   switch(Driver[i].opCode) {
     case 0: {
@@ -106,14 +109,27 @@ String operate() {
   }
 }
 
-
-
-void setup() {
-  // put your setup code here, to run once:
-
+void setup(){
+  Serial.begin(9600);
+  pinMode(up,INPUT);
+  pinMode(down,INPUT);
+  for(int i=0;i<8;i++){
+    String k = String(i);
+    op.setOutput(k,i);
+  }
+  lcd.begin(16, 2);
+  lcd.print("hello, world!");
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-
+void loop(){
+  if(i==8)
+    i=0;
+  if (digitalRead(up)==1){
+    i++;
+    lcd.print(operate());
+  }
+  else if (digitalRead(down)==1){
+    i--;
+    lcd.print(operate());
+  }
 }
