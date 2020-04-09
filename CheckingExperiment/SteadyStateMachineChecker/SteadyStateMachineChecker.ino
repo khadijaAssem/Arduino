@@ -62,7 +62,19 @@ void output(String str){
   }
 }
 int SSMachine(int s){
-  return 0;
+   else if(currentState == 'B'){
+    if (s==0)
+      return 0;
+      else {
+        currentState == 'A';
+        return 1;
+        
+      }
+      
+    
+    
+   
+  }
 }
 int readSensor(int s){
   int LDRValue = 0;                       // result of reading the analog pin
