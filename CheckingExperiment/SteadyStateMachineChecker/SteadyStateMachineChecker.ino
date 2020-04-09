@@ -16,18 +16,9 @@ void setup() {
 }
 
 void loop() {
-//  if (Serial.available() > 0) {  // read i\p from serial
-//      output(Serial.readString());  // send i\p serial to output
-//  } 
-//  di gitalWrite(3,LOW);
-//  //Serial.println("LED IS LOW");
-//  delay(100);                    // wait a little
-    digitalWrite(4,HIGH);
-    Serial.println(analogRead(LDR));
-    delay(5000);
-    digitalWrite(4,LOW);
-    Serial.println(analogRead(LDR));
-    delay(1000);
+  if (Serial.available() > 0) {  // read i\p from serial
+      output(Serial.readString());  // send i\p serial to output
+  } 
 }
 
 void output(String str){
@@ -62,18 +53,22 @@ void output(String str){
   }
 }
 int SSMachine(int s){
-   else if(currentState == 'B'){
+  static char currentState = 'A';
+  if (currentState == 'A'){
+    if (s == 0)
+      return 0;
+    else {
+      currentState = 'B';
+       return 0;
+    }
+  }
+   else if (currentState == 'B'){
     if (s==0)
       return 0;
-      else {
+    else {
         currentState == 'A';
-        return 1;
-        
-      }
-      
-    
-    
-   
+        return 1; 
+      } 
   }
 }
 int readSensor(int s){
